@@ -42,11 +42,13 @@ function deleteClaim(id) {
 }
 
 app.get('/claims', (req, res) => {
+    console.log('GET /claims');
     res.status(200).header("content-type", "application/json").send(getClaims());
 });
 
 app.get('/claim/:id', (req, res) => {
     const { id } = req.params;
+    console.log('GET /claim/${id}/');
     try
     {
         const claim = getClaim(id);
@@ -66,6 +68,7 @@ app.get('/claim/:id', (req, res) => {
 app.put('/claim/:id', (req, res) => {
     const { id } = req.params;
     const { by } = req.body;
+    console.log('PUT /claim/${id}/');
 
     if (!by) {
         res.status(400).header("content-type", "text/plain").send("Need a user name to make a claim");
@@ -85,6 +88,7 @@ app.put('/claim/:id', (req, res) => {
 
 app.delete('/claim/:id', (req, res) => {
     const { id } = req.params;
+    console.log('DELETE /claim/${id}/');
     deleteClaim(id);
     res.status(200).header("content-type", "text/plain").send("Claim deleted for " + id);
 });
